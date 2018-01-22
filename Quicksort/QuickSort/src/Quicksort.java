@@ -4,7 +4,7 @@ public class Quicksort {
 	
 	public static final int ARR_LENGTH = 10000;
 	public static final int ARR_RANGE = 1000;
-	public static final int REPEATS = 250;
+	public static final int REPEATS = 50;
 	
 	public static final String LOMUTO = "Lomuto";
 	public static final String MIDDLE = "Middle";
@@ -176,7 +176,7 @@ public class Quicksort {
             meanSort(i, high);
     }
     
-    public String getRunTimes(String type) throws InterruptedException {
+    public String getRunTimes() throws InterruptedException {
     		String times = ""; //type;
     		long startTime, endTime;
     		double durationMilli;
@@ -189,6 +189,8 @@ public class Quicksort {
 	        durationMilli = (endTime - startTime) / 1000000.0;
 	        times += (i+1) + ", " + durationMilli + ", ";
 	        
+	        Thread.sleep(100);
+	        
 	        startTime = System.nanoTime();
 	        middleSort(0, ARR_LENGTH - 1);
 	        endTime = System.nanoTime();
@@ -196,55 +198,26 @@ public class Quicksort {
 	        durationMilli = (endTime - startTime) / 1000000.0;
 	        times += durationMilli + ", ";
 	        
+	        Thread.sleep(100);
+	        
 	        startTime = System.nanoTime();
 	        meanSort(0, ARR_LENGTH - 1);
 	        endTime = System.nanoTime();
 	        
 	        durationMilli = (endTime - startTime) / 1000000.0;
-	        times += durationMilli + "\n";
+	        times += durationMilli + WriteCSV.NEW_LINE_SEPARATOR;
 	        
 	        Thread.sleep(100);
     		}
     		
     		return times;
-    		
-//    		for (int i = 0; i < REPEATS; i++) {
-//    			
-//    			ranArr();
-//				
-//    			if (type == LOMUTO) {
-//    		        startTime = System.nanoTime();
-//    		        lomutoSort(0, ARR_LENGTH - 1);
-//    		        endTime = System.nanoTime();
-//    			} else if (type == MIDDLE){
-//    		        startTime = System.nanoTime();
-//    		        middleSort(0, ARR_LENGTH - 1);
-//    		        endTime = System.nanoTime();
-//    			} else {
-//    		        startTime = System.nanoTime();
-//    		        meanSort(0, ARR_LENGTH - 1);
-//    		        endTime = System.nanoTime();
-//    			}
-//    			
-//    			double durationMilli = (endTime - startTime) / 1000000.0;  //divide by 1000000 to get milliseconds.
-//		        
-//	        System.out.println("Milliseconds: " + durationMilli + " Type: " + type);
-//	        times += ", " + durationMilli;
-//	 
-//	        System.out.println("sorted array");
-//	        printArray();
-//		}
-//    		
-//    		return times;
     }
     
     public static void main (String args[]) throws InterruptedException {
     		
     		Quicksort QS = new Quicksort();
     		
-    		System.out.println(QS.getRunTimes(LOMUTO));
-    		System.out.println(QS.getRunTimes(MIDDLE));
-    		System.out.println(QS.getRunTimes(MEAN));
+    		System.out.println(QS.getRunTimes());
     }
     
 
